@@ -5,28 +5,36 @@
 </head>
 <body>
     <div class='container'>
-        <h1>Address Book</h1>
-       <ul>
-           <li>one</li>
-           <li>one</li>
-           <li>one</li>
-           <li>one</li>
 
+        {% if contact is not empty %}
+         <h2>Here are all your contact:</h2>
+         <ul>
+             {% for contacts in contact %}
+             <p>{{ contacts.getName }}</p>
+             <p>{{ contacts.getPhone }}</p>
+             <p>{{ contacts.getAddress }}</p>
+                 {% endfor %}
+                 <form action='/delete_contact' method='post'>
+                <button type='submit'>Clear Address Book</button>
+            </form>
          </ul>
+         {% endif %}
 
+
+         <h3>Please Add Your New Contact</h3>
     <form action='/create_contact' method='post'>
     <div class='form-group'>
         <label for='name'>First Name</label>
         <input id='name' class='form-control' name='name' type='text'>
     </div>
-    <!-- <div class='form-group'>
+    <div class='form-group'>
         <label for=phone>Phone Number</label>
         <input id=phone  class='form-control' name=phone type='text'>
     </div>
         <div class='form-group'>
-        <label for='name'>Address</label>
-        <input id='name' class='form-control' name='name' type='text'>
-    </div> -->
+        <label for='address'>Address</label>
+        <input id='address' class='form-control' name='address' type='text'>
+    </div>
 
         <button type='submit' class='btn-success'>Add Contact</button>
     </form>

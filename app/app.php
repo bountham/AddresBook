@@ -15,10 +15,15 @@
     });
 
     $app->post("/create_contact", function() use ($app) {
-        $addcontact = new Contact($_POST['name']);
+        $addcontact = new Contact($_POST['name'],$_POST['phone'],$_POST['address']);
         $addcontact->save();
         return $app['twig']->render('create_contact.twig', array('new_contact' => $addcontact));
+
     });
 
+    $app->post("/delete_contact", function() use ($app) {
+        Contact::deleteAll();
+        return $app['twig']->render('delete_contact.twig');
+    });
     return $app;
 ?>
